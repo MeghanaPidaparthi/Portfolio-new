@@ -9,4 +9,4 @@ npm install
 npm run dev
 ```
 
-This repository currently contains the React, Vite, Tailwind CSS, and OS-state foundation. Boot and login screens will be implemented in a later step.
+This repository currently contains the React, Vite, Tailwind CSS, OS-state, and boot/login/shutdown foundation. The desktop remains a placeholder.

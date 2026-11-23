@@ -13,6 +13,9 @@ export const useOsStore = create(
       muted: true,
       /** @param {boolean} muted */
       setMuted: (muted) => set({ muted }),
+      isShutdownDialogOpen: false,
+      openShutdownDialog: () => set({ isShutdownDialogOpen: true }),
+      closeShutdownDialog: () => set({ isShutdownDialogOpen: false }),
     }),
     {
       name: 'meghana-os-preferences',

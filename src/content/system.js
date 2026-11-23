@@ -1,8 +1,12 @@
 ﻿export const system = {
-  bootText: '[PLACEHOLDER: boot status text]',
-  loginWelcomeText: '[PLACEHOLDER: login welcome text]',
-  displayName: '[PLACEHOLDER: display name]',
-  siteName: '[PLACEHOLDER: site name]',
-  desktopText: '[PLACEHOLDER: desktop state text]',
-  shutdownText: '[PLACEHOLDER: shutdown state text]',
+  bootText: 'Starting Meghana OS...',
+  bootWordmarkTop: 'My',
+  bootWordmarkMain: 'Portfolio',
+  bootWordmarkSuffix: 'xp',
+  loginWelcomeText: 'To begin, click your user name',
+  displayName: 'megh',
+  siteName: 'My Portfolio',
+  desktopText: 'Desktop placeholder — the desktop is coming in a later step.',
+  shutdownText: 'Meghana OS is now shut down.',
+  restartText: 'Click anywhere to restart.',
 }

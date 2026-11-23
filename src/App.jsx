@@ -1,34 +1,43 @@
-﻿import { system } from './content/system.js'
+﻿import { useEffect } from 'react'
+import { system } from './content/system.js'
+import Boot from './os/Boot.jsx'
+import Login from './os/Login.jsx'
+import Shutdown from './os/Shutdown.jsx'
 import { useOsStore } from './os/osStore.js'
 
-const stateText = {
-  boot: system.bootText,
-  login: system.loginWelcomeText,
-  desktop: system.desktopText,
-  shutdown: system.shutdownText,
-}
-
-const osStates = ['boot', 'login', 'desktop', 'shutdown']
+const states = ['boot', 'login', 'desktop', 'shutdown']
 
 function App() {
   const osState = useOsStore((state) => state.osState)
   const setOsState = useOsStore((state) => state.setOsState)
+  const openShutdownDialog = useOsStore((state) => state.openShutdownDialog)
+
+  useEffect(() => {
+    try {
+      if (window.sessionStorage.getItem('os-session')) setOsState('login')
+    } catch {
+      // The boot flow remains available when browser storage is disabled.
+    }
+  }, [setOsState])
 
   return (
-    <main className="os-shell flex flex-col items-center justify-center gap-6 bg-slate-100 p-6 text-slate-900">
-      <section aria-live="polite" className="text-center">
-        <h1 className="text-2xl font-semibold">{system.siteName}</h1>
-        <p className="mt-2 text-sm" data-os-state={osState}>
-          {stateText[osState]}
-        </p>
-      </section>
+    <>
+      {osState === 'boot' && <Boot />}
+      {osState === 'login' && <Login />}
+      {osState === 'desktop' && (
+        <main className="os-shell desktop-placeholder">
+          <h1>{system.siteName}</h1>
+          <p>{system.desktopText}</p>
+        </main>
+      )}
+      {(osState === 'shutdown' || osState === 'desktop') && <Shutdown />}
 
       {import.meta.env.DEV && (
-        <nav aria-label="Development OS state switcher" className="flex flex-wrap justify-center gap-2">
-          {osStates.map((state) => (
+        <nav className="dev-switcher" aria-label="Development OS state switcher">
+          <span>DEV</span>
+          {states.map((state) => (
             <button
               aria-pressed={osState === state}
-              className="rounded border border-slate-400 bg-white px-3 py-1.5 text-sm capitalize hover:bg-slate-200"
               key={state}
               onClick={() => setOsState(state)}
               type="button"
@@ -36,10 +45,14 @@ function App() {
               {state}
             </button>
           ))}
+          {osState === 'desktop' && (
+            <button onClick={openShutdownDialog} type="button">Shutdown dialog</button>
+          )}
         </nav>
       )}
-    </main>
+    </>
   )
 }
 
 export default App
+

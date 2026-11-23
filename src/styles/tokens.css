@@ -1,4 +1,24 @@
 ﻿:root {
+  --boot-black: #000000;
+  --boot-white: #ffffff;
+  --boot-blue: #3040d2;
+  --boot-blue-light: #576ce1;
+  --boot-orange: #f8682c;
+  --boot-cyan: #00b4f1;
+  --boot-gray: #414141;
+  --boot-green: #91c300;
+
+  --login-white: #ffffff;
+  --login-blue-deep: #003399;
+  --login-blue-dark: #002570;
+  --login-blue: #4e6fd6;
+  --login-gray: #737373;
+  --login-lavender: #d6d6ff;
+  --login-orange: #f8682c;
+
+  --font-screen: Inter, 'Segoe UI', Tahoma, sans-serif;
+  --font-screen-title: 'Segoe UI', Inter, Tahoma, sans-serif;
+
   --xp-titlebar-gradient: linear-gradient(
     90deg,
     #2f86f7 0%,
@@ -11,25 +31,14 @@
   --xp-window-radius-top: 9px;
   --xp-window-body: #ece9d8;
   --xp-taskbar: #245edb;
-  --xp-taskbar-gradient: linear-gradient(
-    90deg,
-    #3168d5,
-    #245edb,
-    #2457cf,
-    #1941a5
-  );
-  --xp-start-gradient: linear-gradient(
-    180deg,
-    #69c765,
-    #3c9d3c,
-    #2e8b2e,
-    #226d22
-  );
+  --xp-taskbar-gradient: linear-gradient(90deg, #3168d5, #245edb, #2457cf, #1941a5);
+  --xp-start-gradient: linear-gradient(180deg, #69c765, #3c9d3c, #2e8b2e, #226d22);
   --xp-start-font-style: italic;
   --xp-start-font-weight: 700;
   --xp-selection: #316ac5;
   --xp-close-gradient: linear-gradient(180deg, #ee7a58, #c43a18);
   --xp-font-body: Tahoma, 'Noto Sans', Verdana, sans-serif;
   --xp-font-title: 'Trebuchet MS', 'Noto Sans', sans-serif;
-  --xp-progress-segment: #4caf3f;
+  --xp-progress-segment: var(--boot-blue-light);
 }
+
