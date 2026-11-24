@@ -1,6 +1,6 @@
 ﻿import { useEffect } from 'react'
-import { system } from './content/system.js'
 import Boot from './os/Boot.jsx'
+import Desktop from './os/Desktop.jsx'
 import Login from './os/Login.jsx'
 import Shutdown from './os/Shutdown.jsx'
 import { useOsStore } from './os/osStore.js'
@@ -24,12 +24,7 @@ function App() {
     <>
       {osState === 'boot' && <Boot />}
       {osState === 'login' && <Login />}
-      {osState === 'desktop' && (
-        <main className="os-shell desktop-placeholder">
-          <h1>{system.siteName}</h1>
-          <p>{system.desktopText}</p>
-        </main>
-      )}
+      {osState === 'desktop' && <Desktop />}
       {(osState === 'shutdown' || osState === 'desktop') && <Shutdown />}
 
       {import.meta.env.DEV && (
@@ -55,4 +50,3 @@ function App() {
 }
 
 export default App
-
