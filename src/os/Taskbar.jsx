@@ -5,6 +5,8 @@ import networkIcon from '../assets/icons/network-activity.png'
 import overflowIcon from '../assets/icons/overflow-button.png'
 import securityIcon from '../assets/icons/windows-security-center-ok.png'
 import { useClock } from '../hooks/useClock.js'
+import { getActiveId, useWindowStore } from '../windows/windowStore.js'
+import { getIconSource } from './icons.js'
 import { mute, unmute } from './audio.js'
 import { useOsStore } from './osStore.js'
 import StartMenu from './StartMenu.jsx'
@@ -28,8 +30,20 @@ function SpeakerIcon({ muted }) {
 function Taskbar() {
   const muted = useOsStore((state) => state.muted)
   const { time, date, iso } = useClock()
+  const windows = useWindowStore((state) => state.windows)
+  const focusWindow = useWindowStore((state) => state.focus)
+  const minimiseWindow = useWindowStore((state) => state.minimise)
+  const restoreWindow = useWindowStore((state) => state.restore)
+  const activeId = getActiveId(windows)
+  const volumeSource = getIconSource(muted ? 'volume-muted' : 'volume')
   const [isStartOpen, setIsStartOpen] = useState(false)
   const [isTrayExpanded, setIsTrayExpanded] = useState(true)
+
+  function handleTabClick(win) {
+    if (win.minimised) restoreWindow(win.id)
+    else if (win.id === activeId) minimiseWindow(win.id)
+    else focusWindow(win.id)
+  }
 
   function toggleMute() {
     if (muted) unmute()
@@ -51,8 +65,24 @@ function Taskbar() {
         <span>start</span>
       </button>
 
-      {/* Program tabs for open windows are added here by the window manager step. */}
-      <div className="taskbar-tabs" />
+      <div className="taskbar-tabs" role="toolbar" aria-label="Open windows">
+        {windows.map((win) => {
+          const iconSource = win.icon ? getIconSource(win.icon) : undefined
+          return (
+            <button
+              aria-pressed={win.id === activeId}
+              className={`program-tab${win.id === activeId && !win.dialog ? ' is-active' : ''}`}
+              key={win.id}
+              onClick={() => handleTabClick(win)}
+              title={win.title}
+              type="button"
+            >
+              {iconSource && <img src={iconSource} alt="" draggable="false" />}
+              <span>{win.title}</span>
+            </button>
+          )
+        })}
+      </div>
 
       <div className="tray" role="group" aria-label="Notification area">
         <button
@@ -83,7 +113,11 @@ function Taskbar() {
           onClick={toggleMute}
           type="button"
         >
-          <SpeakerIcon muted={muted} />
+          {volumeSource ? (
+            <img src={volumeSource} alt="" draggable="false" />
+          ) : (
+            <SpeakerIcon muted={muted} />
+          )}
         </button>
         {/* TODO (Phase 2): double click opens the Clock/Calendar app. */}
         <time className="tray-clock" dateTime={iso} title={date} aria-label={`${time}, ${date}`}>

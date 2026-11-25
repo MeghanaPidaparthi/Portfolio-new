@@ -1,0 +1,202 @@
+.window-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.xp-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 0 4px 4px;
+  border-radius: 9px 9px 0 0;
+  color: #111111;
+  background: #0058e6;
+  box-shadow: 0 10px 28px rgb(0 0 0 / 40%);
+  font-family: var(--font-xp);
+  pointer-events: auto;
+}
+
+.xp-window.is-hidden {
+  display: none;
+}
+
+.xp-window.is-maximised {
+  inset: 0 0 var(--taskbar-h) 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+}
+
+.xp-titlebar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  margin: 0 -4px;
+  padding: 0 5px 0 8px;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(180deg, #2f86f7 0%, #0f64e8 8%, #0058e6 90%, #0044c4 100%);
+  touch-action: none;
+}
+
+.xp-window.is-maximised .xp-titlebar {
+  border-radius: 0;
+}
+
+.xp-window:not(.is-active) .xp-titlebar {
+  background: linear-gradient(180deg, #8ba6e8 0%, #7696df 8%, #6f8fd9 90%, #6382cf 100%);
+}
+
+.xp-window:not(.is-active) {
+  background: #6f8fd9;
+}
+
+.xp-titlebar-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.xp-titlebar-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: #ffffff;
+  font: 700 13px / 1 'Trebuchet MS', 'Noto Sans', sans-serif;
+  text-overflow: ellipsis;
+  text-shadow: 1px 1px 0 #0a2f8a;
+  white-space: nowrap;
+}
+
+.xp-titlebar-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.xp-button {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  background: linear-gradient(#4d97ff, #1c5fdd);
+  cursor: pointer;
+}
+
+.xp-button svg {
+  width: 12px;
+  height: 12px;
+}
+
+.xp-button:hover {
+  filter: brightness(1.12);
+}
+
+.xp-button.xp-button-close {
+  width: 23px;
+  height: 23px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.xp-button.xp-button-close svg {
+  width: 23px;
+  height: 23px;
+}
+
+.xp-window-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: #ece9d8;
+}
+
+.placeholder-app {
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+  padding: 24px;
+  color: #444444;
+  font-size: 13px;
+  text-align: center;
+}
+
+.program-tab {
+  display: flex;
+  flex: 0 1 160px;
+  align-items: center;
+  gap: 6px;
+  min-width: 36px;
+  height: calc(var(--taskbar-h) - 6px);
+  margin-top: 3px;
+  padding: 0 8px;
+  border: 1px solid #1c4aa8;
+  border-radius: 3px;
+  color: #ffffff;
+  background: linear-gradient(#428af2, #3980f4 50%, #3776e1);
+  font: 11px var(--font-xp);
+  text-align: left;
+  cursor: pointer;
+}
+
+.program-tab:hover {
+  border-color: #2a5ec9;
+  background: linear-gradient(#7bb5fc, #55a0ff 50%, #428cef);
+}
+
+.program-tab.is-active {
+  border-color: #134096;
+  background: linear-gradient(#164cbb, #174db9 60%, #143d89);
+  box-shadow: inset 1px 1px 3px rgb(0 0 0 / 40%);
+}
+
+.program-tab:active {
+  background: linear-gradient(#2e6de9, #3573e9 60%, #1a4597);
+}
+
+.program-tab img {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.program-tab span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .program-tab {
+    flex: 0 0 auto;
+    justify-content: center;
+  }
+
+  .program-tab span {
+    display: none;
+  }
+}
+
+/* Dialog windows (welcome wizard): pale frame, close button only. */
+.xp-window.is-dialog,
+.xp-window.is-dialog:not(.is-active) {
+  background: #7a96e0;
+}
+
+.xp-window.is-dialog .xp-titlebar,
+.xp-window.is-dialog:not(.is-active) .xp-titlebar {
+  background: linear-gradient(180deg, #8fb2eb 0%, #7998e0 10%, #7996df 55%, #79a0ea 100%);
+}
+
+.xp-window.is-dialog .xp-titlebar-text {
+  color: #d8e4f8;
+  text-shadow: none;
+}
+

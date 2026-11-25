@@ -1,32 +1,26 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { desktopIcons } from '../content/desktopIcons.js'
+import WindowLayer from '../windows/WindowLayer.jsx'
+import { useWindowStore } from '../windows/windowStore.js'
+import { WELCOME_SEEN_KEY } from '../apps/welcome/Welcome.jsx'
+import { welcome } from '../content/welcome.js'
+import { getIconSource } from './icons.js'
+import { launchItem } from './launch.js'
 import Taskbar from './Taskbar.jsx'
 
-const wallpaperFiles = import.meta.glob('../assets/wallpaper/desktop.{jpg,jpeg,png,webp}', {
+const wallpaperFiles = import.meta.glob('../assets/wallpaper/*.{jpg,jpeg,png,webp}', {
   eager: true,
   import: 'default',
   query: '?url',
 })
 const wallpaperSrc = Object.values(wallpaperFiles)[0]
 
-const iconFiles = import.meta.glob('../assets/icons/*.{png,svg,webp}', {
-  eager: true,
-  import: 'default',
-  query: '?url',
-})
-const iconSources = Object.fromEntries(
-  Object.entries(iconFiles).map(([path, url]) => [
-    path.split('/').pop().replace(/\.[^.]+$/, ''),
-    url,
-  ]),
-)
-
 function isTouchPointer() {
   return window.matchMedia('(pointer: coarse)').matches
 }
 
 function DesktopIcon({ item, selected, onSelect, onOpen }) {
-  const source = iconSources[item.icon]
+  const source = getIconSource(item.icon)
 
   function handleClick(event) {
     event.stopPropagation()
@@ -62,18 +56,33 @@ function DesktopIcon({ item, selected, onSelect, onOpen }) {
 
 function Desktop() {
   const [selectedId, setSelectedId] = useState(null)
-  const [devNote, setDevNote] = useState('')
-  const noteTimer = useRef(0)
+  const openWindow = useWindowStore((state) => state.open)
+  const closeAll = useWindowStore((state) => state.closeAll)
 
-  useEffect(() => () => window.clearTimeout(noteTimer.current), [])
+  // Leaving the desktop (log off, shut down) closes every window.
+  useEffect(() => closeAll, [closeAll])
 
-  function openItem(item) {
-    // The window manager arrives in the next step. Until then, show a dev-only hint.
-    if (!import.meta.env.DEV) return
-    setDevNote(`"${item.label}" opens in the next step (window manager).`)
-    window.clearTimeout(noteTimer.current)
-    noteTimer.current = window.setTimeout(() => setDevNote(''), 2200)
-  }
+  // First desktop of the session opens the welcome window. Strict-mode safe: the flag
+  // is only set once the window has actually rendered.
+  useEffect(() => {
+    let seen = false
+    try {
+      seen = Boolean(window.sessionStorage.getItem(WELCOME_SEEN_KEY))
+    } catch {
+      // Storage blocked: show the welcome window.
+    }
+    if (!seen) {
+      openWindow({
+        key: 'welcome',
+        appId: 'welcome',
+        title: welcome.windowTitle,
+        icon: 'welcome',
+        size: { w: 503, h: 392 },
+        dialog: true,
+        center: true,
+      })
+    }
+  }, [openWindow])
 
   return (
     <main
@@ -86,7 +95,7 @@ function Desktop() {
           <li key={item.id}>
             <DesktopIcon
               item={item}
-              onOpen={openItem}
+              onOpen={launchItem}
               onSelect={setSelectedId}
               selected={selectedId === item.id}
             />
@@ -94,10 +103,7 @@ function Desktop() {
         ))}
       </ul>
 
-      {import.meta.env.DEV && devNote && (
-        <div className="dev-toast" role="status">{devNote}</div>
-      )}
-
+      <WindowLayer />
       <Taskbar />
     </main>
   )

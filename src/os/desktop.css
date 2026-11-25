@@ -43,6 +43,7 @@
   background-color: #3d8a22;
   background-image: linear-gradient(180deg, #2d78e6 0%, #6fb0f2 52%, #78b24a 52.2%, #3d8a22 100%);
   background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
 }
 
@@ -101,9 +102,9 @@
 }
 
 .desktop-icon-label {
-  max-width: 100%;
   padding: 1px 3px;
-  font-size: clamp(11px, 0.75vw, 14px);
+  width: min(100%, 6.4vw);
+  font-size: clamp(11px, 0.92vw, 18px);
   line-height: 1.25;
   overflow-wrap: anywhere;
   text-align: center;
@@ -126,19 +127,6 @@
   outline-offset: -1px;
 }
 
-.dev-toast {
-  position: fixed;
-  z-index: 45;
-  top: 12px;
-  left: 50%;
-  padding: 6px 12px;
-  border-radius: 4px;
-  color: #ffffff;
-  background: rgb(20 27 46 / 90%);
-  font: 12px Tahoma, sans-serif;
-  transform: translateX(-50%);
-}
-
 .taskbar {
   position: fixed;
   z-index: 30;
@@ -147,6 +135,7 @@
   left: 0;
   display: flex;
   align-items: stretch;
+  justify-content: flex-start;
   height: var(--taskbar-h);
   color: #ffffff;
   background: var(--xp-taskbar-bg);
@@ -201,33 +190,70 @@
 }
 
 .tray {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 clamp(8px, 0.8vw, 14px) 0 clamp(10px, 1vw, 16px);
+  gap: 4px;
+  padding: 0 calc(var(--taskbar-h) * 0.4) 0 0;
   border-left: 1px solid #0c59c9;
   background: var(--xp-tray-bg);
   box-shadow: inset 1px 0 0 rgb(24 190 242 / 55%);
 }
 
-.tray-button {
+/* The round chevron straddles the left edge of the tray, as in the design. */
+.tray-overflow {
+  z-index: 1;
   display: grid;
+  flex: none;
   place-items: center;
-  width: calc(var(--taskbar-h) * 0.72);
-  height: calc(var(--taskbar-h) * 0.72);
-  padding: 2px;
-  border: 1px solid transparent;
-  border-radius: 3px;
+  width: calc(var(--taskbar-h) * 0.65);
+  height: calc(var(--taskbar-h) * 0.65);
+  margin-left: calc(var(--taskbar-h) * -0.325);
+  padding: 0;
+  border: 0;
   background: transparent;
   cursor: pointer;
 }
 
-.tray-button:hover {
-  border-color: rgb(255 255 255 / 40%);
-  background: rgb(255 255 255 / 15%);
+.tray-overflow img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tray-overflow img.is-flipped {
+  transform: scaleX(-1);
+}
+
+.tray-icon {
+  display: block;
+  width: calc(var(--taskbar-h) * 0.53);
+  height: calc(var(--taskbar-h) * 0.53);
+  object-fit: contain;
+  user-select: none;
+}
+
+.tray-button {
+  display: grid;
+  place-items: center;
+  width: calc(var(--taskbar-h) * 0.53);
+  height: calc(var(--taskbar-h) * 0.53);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tray-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .tray-clock {
+  margin-left: 2px;
   font-size: calc(var(--taskbar-h) * 0.4);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -282,7 +308,19 @@
   background: rgb(255 255 255 / 18%);
 }
 
+/* Dev panel: keep it out of the tray and clock. */
+.dev-switcher {
+  top: 10px;
+  right: 10px;
+  bottom: auto;
+}
+
 @media (max-width: 767px) {
+  .desktop-icon-label {
+    width: auto;
+    max-width: 100%;
+  }
+
   .desktop-icons {
     grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
     grid-auto-rows: auto;
@@ -297,34 +335,4 @@
   .desktop-icon-label {
     font-size: 12px;
   }
-}
-
-.tray-overflow {
-  display: grid;
-  place-items: center;
-  width: calc(var(--taskbar-h) * 0.72);
-  height: calc(var(--taskbar-h) * 0.72);
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.tray-overflow img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.tray-overflow img.is-flipped {
-  transform: scaleX(-1);
-}
-
-.tray-icon {
-  display: block;
-  width: calc(var(--taskbar-h) * 0.6);
-  height: calc(var(--taskbar-h) * 0.6);
-  object-fit: contain;
-  user-select: none;
 }

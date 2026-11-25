@@ -1,0 +1,138 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  font-family: var(--font-xp);
+}
+
+.welcome-main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.welcome-banner {
+  flex: none;
+  width: 33%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff6a00 0 50%, #7fc400 50% 100%);
+}
+
+.welcome-banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+
+.welcome-content {
+  flex: 1;
+  min-width: 0;
+  padding: 18px 12px 12px 8px;
+  overflow: auto;
+  color: #000000;
+}
+
+.welcome-content h1 {
+  margin: 0 0 20px;
+  font: 700 16px / 1.2 Arial, Helvetica, sans-serif;
+}
+
+.welcome-intro {
+  margin: 0 0 20px;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.welcome-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.welcome-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.welcome-arrow {
+  flex: none;
+  margin-top: 1px;
+}
+
+.welcome-link {
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.welcome-link:hover {
+  color: #0033cc;
+  text-decoration: underline;
+}
+
+.welcome-link:focus-visible,
+.xp-btn:focus-visible {
+  outline: 1px dotted #000000;
+  outline-offset: 2px;
+}
+
+.welcome-footer {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+  padding: 12px 10px;
+  border-top: 1px solid #cac6af;
+  box-shadow: inset 0 1px 0 #ffffff;
+  background: #ece9d8;
+}
+
+.welcome-footer .xp-btn:last-child {
+  margin-left: 12px;
+}
+
+.xp-btn {
+  min-width: 73px;
+  height: 21px;
+  padding: 0 8px;
+  border: 1px solid #1c5180;
+  border-radius: 3px;
+  color: #000000;
+  background: linear-gradient(#ffffff, #f6f6f4 60%, #ece9d8);
+  font: 11px var(--font-xp);
+  cursor: pointer;
+}
+
+.xp-btn.is-default {
+  border-color: #002ebe;
+  box-shadow: inset 0 0 0 1px #b6cdf5;
+}
+
+.xp-btn:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 1px #f7b84a;
+}
+
+.xp-btn:active:not(:disabled) {
+  background: #e0ddc9;
+}
+
+.xp-btn:disabled {
+  border-color: #cac6af;
+  color: #a19f92;
+  background: #f5f4ea;
+  cursor: default;
+}

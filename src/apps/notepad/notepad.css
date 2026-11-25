@@ -1,0 +1,83 @@
+.notepad {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+}
+
+.notepad-menubar {
+  display: flex;
+  flex: none;
+  gap: 2px;
+  padding: 1px 2px;
+  border-bottom: 1px solid #aca899;
+  background: #ece9d8;
+  font: 11px var(--font-xp);
+}
+
+.notepad-menu {
+  position: relative;
+}
+
+.notepad-menu-button {
+  padding: 2px 7px;
+  border: 0;
+  color: #000000;
+  background: transparent;
+  font: inherit;
+  cursor: default;
+}
+
+.notepad-menu-button:hover,
+.notepad-menu-button.is-open {
+  color: #ffffff;
+  background: #316ac5;
+}
+
+.notepad-dropdown {
+  position: absolute;
+  z-index: 5;
+  top: 100%;
+  left: 0;
+  min-width: 130px;
+  padding: 2px;
+  border: 1px solid #aca899;
+  background: #ffffff;
+  box-shadow: 2px 2px 3px rgb(0 0 0 / 30%);
+}
+
+.notepad-dropdown button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 3px 8px 3px 4px;
+  border: 0;
+  color: #000000;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+}
+
+.notepad-dropdown button:hover {
+  color: #ffffff;
+  background: #316ac5;
+}
+
+.notepad-check {
+  display: inline-block;
+  width: 16px;
+  text-align: center;
+}
+
+.notepad-text {
+  flex: 1;
+  min-height: 0;
+  padding: 3px 4px;
+  border: 0;
+  outline: 0;
+  color: #000000;
+  background: #ffffff;
+  font: 13px / 1.35 'Lucida Console', Consolas, 'DejaVu Sans Mono', monospace;
+  resize: none;
+}
