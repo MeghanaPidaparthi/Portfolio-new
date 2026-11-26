@@ -6,6 +6,7 @@
 @import "./windows/windows.css";
 @import "./apps/welcome/welcome.css";
 @import "./apps/notepad/notepad.css";
+@import "./apps/mail/mail.css";
 
 :root {
   font-family: var(--font-screen);

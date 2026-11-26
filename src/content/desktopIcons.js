@@ -7,6 +7,8 @@
  * @property {string} [windowTitle]    Window and taskbar title, if different from the label.
  * @property {object} [props]          Passed to the app, e.g. which text file Notepad shows.
  * @property {{ w: number, h: number }} [size]  Opening size, if not the default.
+ * @property {string} [windowIcon]      Title-bar icon (file name in src/assets/icons/), if different from the desktop icon.
+ * @property {boolean} [center]        Open centred instead of cascading.
  */
 
 /**
@@ -25,7 +27,16 @@ export const desktopIcons = [
     props: { file: 'about-me' },
     size: { w: 620, h: 460 },
   },
-  { id: 'mail', label: 'Emails', icon: 'email', appId: 'mail' },
+  {
+    id: 'mail',
+    label: 'Emails',
+    icon: 'email',
+    appId: 'mail',
+    windowTitle: 'Contact me :)',
+    windowIcon: 'mail-small',
+    size: { w: 845, h: 579 },
+    center: true,
+  },
   { id: 'experience', label: 'Experience', icon: 'experience', appId: 'experience' },
   { id: 'community', label: 'Community', icon: 'empty-folder', appId: 'community' },
   { id: 'resume', label: 'Resume', icon: 'file', appId: 'resume' },

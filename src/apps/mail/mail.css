@@ -1,0 +1,272 @@
+/* Mail window. Measured from the 845x579 design. Tahoma throughout. */
+.mail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  color: #000000;
+  font: 11px / 1.2 Tahoma, 'Noto Sans', sans-serif;
+}
+
+.mail-menubar {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: stretch;
+  height: 27px;
+  padding-left: 3px;
+  background: #efebd8;
+}
+
+.mail-menu {
+  position: relative;
+  display: flex;
+}
+
+.mail-menu-button {
+  padding: 0 7px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: default;
+}
+
+.mail-menu-button:hover:not(:disabled),
+.mail-menu-button.is-open {
+  background: #316ac5;
+  color: #ffffff;
+}
+
+.mail-menu-button:disabled {
+  color: #aca899;
+}
+
+.mail-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  min-width: 140px;
+  flex-direction: column;
+  padding: 2px;
+  border: 1px solid #aca899;
+  background: #ffffff;
+  box-shadow: 2px 2px 3px rgb(0 0 0 / 35%);
+}
+
+.mail-dropdown button {
+  padding: 4px 22px 4px 22px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+}
+
+.mail-dropdown button.is-checked::before {
+  position: absolute;
+  left: 8px;
+  content: '\2713';
+}
+
+.mail-dropdown button {
+  position: relative;
+}
+
+.mail-dropdown button:hover {
+  background: #316ac5;
+  color: #ffffff;
+}
+
+.mail-flag {
+  display: block;
+  width: 42px;
+  height: 27px;
+  margin-left: auto;
+  border-left: 1px solid #cac6af;
+  box-shadow: inset 1px 0 0 #f6f6f4;
+}
+
+.mail-flag img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mail-toolbar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 50px;
+  padding: 0 4px;
+  background: linear-gradient(90deg, #f3f4f7, #e9e5cb);
+}
+
+.mail-grip {
+  width: 3px;
+  height: 36px;
+  margin: 0 5px 0 2px;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #aca899;
+}
+
+.mail-tool {
+  display: flex;
+  min-width: 48px;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 3px 4px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: default;
+}
+
+.mail-tool:hover:not(:disabled) {
+  border-color: #b9b49d;
+  background: rgb(255 255 255 / 55%);
+}
+
+.mail-tool.is-pressed {
+  border-color: #8a8670;
+  background: rgb(0 0 0 / 8%);
+}
+
+.mail-tool:disabled {
+  color: #aca899;
+}
+
+.mail-tool-icon {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+}
+
+.mail-tool-icon img {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.mail-sep {
+  align-self: stretch;
+  width: 1px;
+  margin: 6px 5px;
+  background: #cac6af;
+  box-shadow: 1px 0 0 #f6f6f4;
+}
+
+.mail-strip {
+  flex: none;
+  height: 23px;
+  background: linear-gradient(90deg, #f0efeb, #ece9d7);
+}
+
+.mail-fields {
+  display: grid;
+  flex: none;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  row-gap: 5px;
+  padding: 7px 19px 7px 16px;
+  background: #ece9d8;
+}
+
+.mail-fields input {
+  width: 100%;
+  height: 15px;
+  padding: 0 2px;
+  border: 1px solid #666666;
+  border-radius: 0;
+  background: #ffffff;
+  color: inherit;
+  font: inherit;
+  outline: 0;
+}
+
+.mail-fields input:read-only {
+  color: #000000;
+}
+
+.mail-body {
+  position: relative;
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  padding: 17px 19px 0 21px;
+  background: #ffffff;
+}
+
+.mail-body textarea {
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 48px;
+  padding: 3px;
+  border: 1px solid #666666;
+  border-radius: 0;
+  background: #ffffff;
+  color: inherit;
+  font: inherit;
+  outline: 0;
+  resize: none;
+}
+
+.mail-body textarea::placeholder {
+  color: #8a8a8a;
+}
+
+.mail-status {
+  position: absolute;
+  right: 19px;
+  bottom: 8px;
+  left: 21px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 5px 8px;
+  border: 1px solid #aca899;
+  background: #ffffe1;
+}
+
+.mail-status.is-error {
+  border-color: #b3261e;
+  color: #7a1510;
+}
+
+.mail-status-links {
+  display: flex;
+  gap: 12px;
+}
+
+.mail-status button,
+.mail-status a {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #0033cc;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .mail-toolbar {
+    overflow-x: auto;
+  }
+}
+
+.mail-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}

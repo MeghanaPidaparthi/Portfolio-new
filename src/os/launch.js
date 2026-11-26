@@ -1,4 +1,5 @@
 import { desktopIcons } from '../content/desktopIcons.js'
+import { getIconSource } from './icons.js'
 import { useWindowStore } from '../windows/windowStore.js'
 
 /**
@@ -10,9 +11,10 @@ export function launchItem(item) {
     key: item.id,
     appId: item.appId,
     title: item.windowTitle ?? item.label,
-    icon: item.icon,
+    icon: item.windowIcon && getIconSource(item.windowIcon) ? item.windowIcon : item.icon,
     props: item.props,
     size: item.size,
+    center: item.center,
   })
 }
 
