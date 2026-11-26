@@ -1,0 +1,258 @@
+.sm {
+  position: fixed;
+  z-index: 35;
+  bottom: var(--taskbar-h);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(380px, 100vw);
+  height: min(478px, calc(100dvh - var(--taskbar-h)));
+  overflow: hidden;
+  border: 1px solid #215cc5;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  color: #373738;
+  background: #215cc5;
+  box-shadow: 2px -2px 8px rgb(0 0 0 / 40%);
+  font: 11px var(--font-xp);
+}
+
+/* Soft inner shadow on the right edge, from the design. */
+.sm::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset -4px 0 4px -1px rgb(0 46 137 / 25%);
+  content: '';
+  pointer-events: none;
+}
+
+.sm-header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  height: 65px;
+  padding: 0 8px 0 5px;
+  background: linear-gradient(180deg, #74aae8 0, #1969d2 5px, #2174db 29px, #4792ec 62px, #4792ec 100%);
+}
+
+.sm-avatar {
+  display: block;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border: 2px solid #e8eef9;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.sm-avatar-fallback {
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: #3a6fd6;
+  font: 700 22px var(--font-xp);
+}
+
+.sm-name {
+  min-width: 0;
+  overflow: hidden;
+  color: #ffffff;
+  font: 700 16px / 1.1 var(--font-xp);
+  text-overflow: ellipsis;
+  text-shadow: 1px 1px 2px rgb(0 0 0 / 45%);
+  white-space: nowrap;
+}
+
+.sm-line {
+  flex: none;
+  height: 3px;
+  border-top: 1px solid #1b6ad0;
+  background: linear-gradient(90deg, #ffe1c5 0%, #ffa24c 50%, #e5bf9e 100%);
+}
+
+.sm-body {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 187px 1fr;
+  min-height: 0;
+  padding: 0 1px;
+  background: #5586d6;
+}
+
+.sm-left,
+.sm-right {
+  min-height: 0;
+  margin: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.sm-left {
+  padding: 1px 0 0;
+  background: #ffffff;
+}
+
+.sm-right {
+  padding: 3px 0 0;
+  border-left: 1px solid #95bdee;
+  background: #d3e5fa;
+}
+
+.sm-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 41px;
+  padding: 0 6px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sm-text {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.sm-label,
+.sm-sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sm-item.is-pinned .sm-label {
+  color: #000000;
+  font-weight: 700;
+}
+
+.sm-sub {
+  color: #7f7f7f;
+}
+
+.sm-icon {
+  display: block;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.sm-icon-fallback {
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  color: #ffffff;
+  background: linear-gradient(145deg, #8fb6f6, #3a6fd6);
+  font-weight: 700;
+}
+
+.sm-sep {
+  position: relative;
+  height: 8px;
+}
+
+.sm-sep::before {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  left: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d5d5cb 20%, #d5d5cb 80%, transparent);
+  content: '';
+}
+
+.sm-right .sm-item {
+  height: 40px;
+  padding: 0 6px 0 7px;
+  gap: 3px;
+  color: #0a236a;
+  font-weight: 700;
+}
+
+.sm-right .sm-item.is-plain {
+  font-weight: 400;
+}
+
+.sm-right .sm-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.sm-item.has-divider::before {
+  position: absolute;
+  top: 2px;
+  right: 27px;
+  left: 26px;
+  height: 2px;
+  border-top: 1px solid #83b7fe;
+  border-bottom: 1px solid #ececed;
+  content: '';
+}
+
+.sm-item:hover:not(:disabled),
+.sm-item:focus-visible {
+  color: #ffffff;
+  background: #316ac5;
+  outline: 0;
+}
+
+.sm-item:hover:not(:disabled) .sm-label,
+.sm-item:focus-visible .sm-label {
+  color: #ffffff;
+}
+
+.sm-item:hover:not(:disabled) .sm-sub,
+.sm-item:focus-visible .sm-sub {
+  color: #dbe7ff;
+}
+
+.sm-item:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.sm-footer {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  height: 39px;
+  padding: 0 12px;
+  border-top: 1px solid #1964cd;
+  background: linear-gradient(180deg, #448be3 0, #2577df 19px, #0d5bc7 39px);
+}
+
+.sm-footer-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 4px;
+  border: 0;
+  border-radius: 3px;
+  color: #ffffff;
+  background: transparent;
+  font: 11px var(--font-xp);
+  cursor: pointer;
+}
+
+.sm-footer-button .sm-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.sm-footer-button:hover,
+.sm-footer-button:focus-visible {
+  background: rgb(255 255 255 / 18%);
+  outline: 0;
+}

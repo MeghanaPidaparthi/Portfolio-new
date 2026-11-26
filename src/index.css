@@ -2,6 +2,7 @@
 @import "./styles/tokens.css";
 @import "./os/screens.css";
 @import "./os/desktop.css";
+@import "./os/startMenu.css";
 @import "./windows/windows.css";
 @import "./apps/welcome/welcome.css";
 @import "./apps/notepad/notepad.css";
